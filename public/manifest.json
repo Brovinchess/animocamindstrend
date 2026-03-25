@@ -1,0 +1,17 @@
+{
+  "name": "Animocaminds - AI News",
+  "short_name": "Animocaminds",
+  "description": "Real-time AI technology news from 21+ sources",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#14b8a6",
+  "icons": [
+    {
+      "src": "/ablogo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
