@@ -75,14 +75,14 @@ export function TabNav({ activeTab, onChange, redditCount, hnCount }: TabNavProp
         borderColor: "var(--border)",
       }}
     >
-      <div className="flex items-center gap-1 overflow-x-auto scrollbar-none">
+      <div className="flex items-center gap-0.5 overflow-x-auto scrollbar-none">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onChange(tab.id)}
-            className={`flex items-center gap-2 shrink-0 rounded-lg px-3.5 py-2 text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 shrink-0 rounded-lg px-3.5 py-2 text-sm font-medium transition-all active:scale-[0.97] ${
               activeTab === tab.id
-                ? "bg-teal/10 text-teal-dark"
+                ? "bg-teal/10 text-teal-dark shadow-sm"
                 : "hover:bg-[var(--surface-hover)]"
             }`}
             style={activeTab !== tab.id ? { color: "var(--text-tertiary)" } : undefined}
@@ -93,7 +93,7 @@ export function TabNav({ activeTab, onChange, redditCount, hnCount }: TabNavProp
             <span className="hidden sm:inline">{tab.label}</span>
             {tab.badge !== undefined && tab.badge > 0 && (
               <span
-                className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
+                className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums ${
                   activeTab === tab.id ? "bg-teal/20 text-teal-dark" : ""
                 }`}
                 style={activeTab !== tab.id ? { background: "var(--surface-muted)", color: "var(--text-muted)" } : undefined}

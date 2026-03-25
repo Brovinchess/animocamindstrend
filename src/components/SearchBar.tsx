@@ -25,8 +25,8 @@ export const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder='Search articles... (press "/" to focus)'
-          className="w-full rounded-lg border py-2 pl-9 pr-4 text-sm outline-none transition-all focus:border-teal focus:ring-1 focus:ring-teal/20"
+          placeholder='Search articles, sources, topics...'
+          className="w-full rounded-lg border py-2.5 pl-9 pr-4 text-sm outline-none transition-all focus:border-teal focus:ring-2 focus:ring-teal/20"
           style={{
             background: "var(--surface-card)",
             borderColor: "var(--border)",

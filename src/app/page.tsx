@@ -21,20 +21,22 @@ export default function Home() {
         {/* Header */}
         <header className="mb-6 flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <Image
-              src="/ablogo.svg"
-              alt="Animoca Brands"
-              width={36}
-              height={20}
-              className="shrink-0"
-            />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal/10">
+              <Image
+                src="/ablogo.svg"
+                alt="Animoca Brands"
+                width={24}
+                height={14}
+                className="shrink-0"
+              />
+            </div>
             <div>
-              <h1 className="text-xl font-semibold tracking-tight mb-0.5" style={{ color: "var(--text-primary)" }}>
-                Animocaminds{" "}
-                <span className="text-teal">— AI News</span>
+              <h1 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
+                Animocaminds
+                <span className="text-teal ml-1.5 font-semibold">AI</span>
               </h1>
-              <p className="text-[13px]" style={{ color: "var(--text-tertiary)" }}>
-                Latest from {NEWS_SOURCES.length} sources — updated live
+              <p className="text-[12px] mt-0.5" style={{ color: "var(--text-tertiary)" }}>
+                Real-time intelligence from {NEWS_SOURCES.length} sources
               </p>
             </div>
           </div>
@@ -69,22 +71,29 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="mt-16 border-t pt-6 pb-8" style={{ borderColor: "var(--border)" }}>
-          <p className="text-[11px] font-medium uppercase tracking-wider mb-3" style={{ color: "var(--text-tertiary)" }}>
-            Agent API
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <code
-              className="rounded-md px-3 py-1.5 text-xs font-mono"
-              style={{ background: "var(--surface-muted)", color: "var(--text-secondary)" }}
-            >
-              GET /api/agent?limit=20
-            </code>
-            <code
-              className="rounded-md px-3 py-1.5 text-xs font-mono"
-              style={{ background: "var(--surface-muted)", color: "var(--text-secondary)" }}
-            >
-              POST /api/agent
-            </code>
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wider mb-2" style={{ color: "var(--text-tertiary)" }}>
+                Agent API
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <code
+                  className="rounded-md border px-3 py-1.5 text-xs font-mono"
+                  style={{ background: "var(--surface-muted)", color: "var(--text-secondary)", borderColor: "var(--border)" }}
+                >
+                  GET /api/agent?limit=20
+                </code>
+                <code
+                  className="rounded-md border px-3 py-1.5 text-xs font-mono"
+                  style={{ background: "var(--surface-muted)", color: "var(--text-secondary)", borderColor: "var(--border)" }}
+                >
+                  POST /api/agent
+                </code>
+              </div>
+            </div>
+            <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>
+              Animocaminds AI Dashboard
+            </p>
           </div>
         </footer>
       </div>

@@ -15,7 +15,7 @@
   --surface-hover: #f4f4f5;
   --surface-muted: #f4f4f5;
   --text-primary: #111111;
-  --text-secondary: #71717a;
+  --text-secondary: #52525b;
   --text-tertiary: #a1a1aa;
   --text-muted: #d4d4d8;
   --border: rgba(228, 228, 231, 0.8);
@@ -42,6 +42,8 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   transition: background-color 0.2s, color 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -53,6 +55,12 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid #14b8a6;
+  outline-offset: 2px;
+}
 
 /* Animations */
 @keyframes fadeInUp {
@@ -70,6 +78,10 @@ body {
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
 }
 
 .animate-fade-in-up {
@@ -101,4 +113,20 @@ body {
 }
 .animate-tab-in {
   animation: tabIn 0.2s ease-out both;
+}
+
+/* Better card hover transitions */
+article {
+  will-change: transform;
+}
+
+/* Smooth link transitions */
+a {
+  transition: color 0.15s ease;
+}
+
+/* Keyboard shortcut pills */
+kbd {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
 }

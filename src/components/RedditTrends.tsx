@@ -45,18 +45,25 @@ export function RedditTrends() {
   const activeSubs = [...new Set(posts.map((p) => p.subreddit))];
 
   return (
-    <section className="mt-10">
+    <section>
       {/* Section header */}
-      <div className="flex items-center gap-2 mb-6">
-        <svg className="h-5 w-5 text-[#FF4500]" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.806 1.304 3.49.997.108-.776.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-        </svg>
-        <h2 className="text-lg font-semibold" style={{ color: "var(--text-primary)" }}>
-          Reddit Trends
-        </h2>
-        <span className="text-xs rounded-full px-2 py-0.5" style={{ background: "var(--surface-muted)", color: "var(--text-tertiary)" }}>
-          {activeSubs.length} subreddits · {posts.length} posts
-        </span>
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg" style={{ background: "rgba(255,69,0,0.1)" }}>
+            <svg className="h-4 w-4 text-[#FF4500]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.793-.26.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.806 1.304 3.49.997.108-.776.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Reddit Trends</h2>
+            <p className="text-[11px]" style={{ color: "var(--text-tertiary)" }}>AI discussions across Reddit</p>
+          </div>
+        </div>
+        {posts.length > 0 && (
+          <span className="rounded-full px-2.5 py-1 text-[11px] font-medium" style={{ background: "rgba(255,69,0,0.1)", color: "#FF4500" }}>
+            {activeSubs.length} subs · {posts.length} posts
+          </span>
+        )}
       </div>
 
       {loading && <SkeletonReddit />}
@@ -196,8 +203,8 @@ export function RedditTrends() {
           {!showAll && filtered.length > 20 && (
             <button
               onClick={() => setShowAll(true)}
-              className="mt-3 w-full rounded-lg py-2 text-xs font-medium transition-colors hover:bg-[var(--surface-hover)]"
-              style={{ color: "var(--text-tertiary)" }}
+              className="mt-3 w-full rounded-lg border py-2.5 text-xs font-medium transition-all hover:bg-[var(--surface-hover)] active:scale-[0.99]"
+              style={{ color: "var(--text-secondary)", borderColor: "var(--border)" }}
             >
               Show all {filtered.length} posts
             </button>
