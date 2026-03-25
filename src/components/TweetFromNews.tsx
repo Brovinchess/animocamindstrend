@@ -162,6 +162,13 @@ export function TweetFromNews() {
       {/* Tweet drafts */}
       {selectedArticle && drafts.length > 0 && (
         <div className="space-y-4">
+          {/* Article preview */}
+          <div className="rounded-xl border p-4" style={{ borderColor: "var(--border)", background: "var(--surface-muted)" }}>
+            <h4 className="text-[13px] font-semibold mb-1" style={{ color: "var(--text-primary)" }}>{selectedArticle.title}</h4>
+            <p className="text-[12px] leading-relaxed mb-2" style={{ color: "var(--text-secondary)" }}>{selectedArticle.description}</p>
+            <span className="text-[10px]" style={{ color: "var(--text-muted)" }}>via {selectedArticle.source.name}</span>
+          </div>
+
           {/* Draft style picker */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: "var(--text-tertiary)" }}>

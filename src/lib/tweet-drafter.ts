@@ -1,5 +1,3 @@
-// Generate tweet drafts from AI news articles
-
 import type { NewsItem } from "./fetch-news";
 
 export interface TweetDraft {
@@ -9,93 +7,97 @@ export interface TweetDraft {
   charCount: number;
 }
 
-const STYLES = [
-  "breaking",
-  "insight",
-  "question",
-  "thread-hook",
-  "hot-take",
-] as const;
+// Extract key points from article description
+function extractKeyPoints(description: string): string[] {
+  const sentences = description
+    .split(/[.!?]+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 15);
+  return sentences;
+}
+
+// Shorten text to fit within a char limit while keeping it readable
+function trimToFit(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 3);
+  const lastSpace = cut.lastIndexOf(" ");
+  return cut.slice(0, lastSpace) + "...";
+}
 
 export function draftTweetsFromArticle(article: NewsItem): TweetDraft[] {
-  const title = article.title;
-  const source = article.source.name;
-  const link = article.link;
-  const short = title.length > 80 ? title.slice(0, 80) + "..." : title;
+  const { title, description, link, source } = article;
+  const points = extractKeyPoints(description);
+  const mainPoint = points[0] || description.slice(0, 200);
+  const secondPoint = points[1] || "";
 
   const drafts: TweetDraft[] = [];
 
-  // 1. Breaking news style
-  drafts.push({
-    id: "breaking",
-    style: "Breaking News",
-    text: `${title}\n\nvia ${source}\n${link}`,
-    charCount: 0,
-  });
+  // 1. Summary tweet — condense the article into a tweet
+  const summaryBody = points.slice(0, 3).join(". ");
+  drafts.push(makeDraft("summary", "Article Summary",
+    trimToFit(`${title}\n\n${summaryBody}\n\n(via ${source.name}) ${link}`, 280)
+  ));
 
-  // 2. Insight/analysis
-  drafts.push({
-    id: "insight",
-    style: "Insight + Link",
-    text: `This is significant: "${short}"\n\nHere's why it matters for the AI space:\n\n→ [Your take]\n→ [Implication]\n\n${link}`,
-    charCount: 0,
-  });
+  // 2. Key takeaway — one strong insight
+  drafts.push(makeDraft("takeaway", "Key Takeaway",
+    trimToFit(`Key takeaway from ${source.name}:\n\n${mainPoint}.\n\n${secondPoint ? secondPoint + "." : ""}\n\nFull article: ${link}`, 280)
+  ));
 
-  // 3. Question/engagement
-  drafts.push({
-    id: "question",
-    style: "Question Hook",
-    text: `"${short}"\n\nWhat do you think — is this actually a big deal or are we overreacting?\n\n${link}`,
-    charCount: 0,
-  });
+  // 3. Thread starter — for a multi-tweet breakdown
+  const threadParts = points.slice(0, 4);
+  const threadBody = [
+    `🧵 ${title}`,
+    "",
+    "Here's what you need to know:",
+    "",
+    ...threadParts.map((p, i) => `${i + 1}. ${p}.`),
+    "",
+    `Source: ${source.name}`,
+    `Full read: ${link}`,
+  ].join("\n");
+  drafts.push(makeDraft("thread", "Thread",
+    trimToFit(threadBody, 280)
+  ));
 
-  // 4. Thread hook
-  drafts.push({
-    id: "thread-hook",
-    style: "Thread Starter",
-    text: `THREAD: "${short}" 🧵\n\nLet me break down why this matters and what most people are missing:\n\n1/`,
-    charCount: 0,
-  });
+  // 4. Hot take — opinionated reaction
+  drafts.push(makeDraft("hot-take", "Hot Take",
+    trimToFit(`This is big: ${mainPoint}.\n\n${secondPoint ? `What makes this interesting: ${secondPoint}.` : "The implications here are bigger than people realize."}\n\nThoughts? ${link}`, 280)
+  ));
 
-  // 5. Hot take
-  drafts.push({
-    id: "hot-take",
-    style: "Hot Take",
-    text: `Hot take: "${short}" is going to age really well.\n\nMost people are sleeping on this but the implications are massive for [industry/tech/users].\n\n${link}`,
-    charCount: 0,
-  });
+  // 5. Breaking style — news anchor format
+  drafts.push(makeDraft("breaking", "Breaking News",
+    trimToFit(`BREAKING: ${mainPoint}.\n\n${secondPoint ? secondPoint + ".\n\n" : ""}${source.name} reports: ${link}`, 280)
+  ));
 
-  // 6. Short + punchy
-  drafts.push({
-    id: "short",
-    style: "Short & Punchy",
-    text: `${short}\n\nThe AI space moves fast. ${link}`,
-    charCount: 0,
-  });
+  // 6. Question hook — engagement bait
+  const questionBody = mainPoint.endsWith("?")
+    ? mainPoint
+    : `${mainPoint} — but what does this actually mean for the industry?`;
+  drafts.push(makeDraft("question", "Question Hook",
+    trimToFit(`${questionBody}\n\n${secondPoint ? secondPoint + ".\n\n" : ""}Read more: ${link}`, 280)
+  ));
 
-  // 7. Personal reaction
-  drafts.push({
-    id: "personal",
-    style: "Personal Reaction",
-    text: `Just read this and had to share — "${short}"\n\nMy honest reaction: [your reaction]\n\nThis changes [what it changes].\n\n${link}`,
-    charCount: 0,
-  });
-
-  // Calculate char counts
-  for (const d of drafts) {
-    d.charCount = d.text.length;
-  }
+  // 7. Contrarian — challenge the narrative
+  drafts.push(makeDraft("contrarian", "Contrarian Take",
+    trimToFit(`Everyone's talking about "${title}" but here's what they're missing:\n\n${mainPoint}.\n\nThe real question is what happens next.\n\n${link}`, 280)
+  ));
 
   return drafts;
 }
 
-// Generate a quick tweet from just a headline for the trending section
+function makeDraft(id: string, style: string, text: string): TweetDraft {
+  return { id, style, text, charCount: text.length };
+}
+
+// Quick tweet for the card-level tweet button
 export function quickTweetFromHeadline(title: string, url?: string): string {
+  // Use the title as content, not just a link
   const templates = [
-    `${title}${url ? `\n\n${url}` : ""}`,
-    `This is huge: ${title}${url ? `\n\n${url}` : ""}`,
-    `Interesting development in AI:\n\n"${title}"${url ? `\n\n${url}` : ""}`,
-    `The AI news cycle never slows down:\n\n${title}${url ? `\n\n${url}` : ""}`,
+    `${title}\n\n${url || ""}`,
+    `Interesting: ${title}\n\n${url || ""}`,
+    `Worth reading — ${title}\n\n${url || ""}`,
+    `This just in: ${title}\n\n${url || ""}`,
   ];
-  return templates[Math.floor(Math.random() * templates.length)];
+  const text = templates[Math.floor(Math.random() * templates.length)];
+  return text.length > 280 ? text.slice(0, 277) + "..." : text;
 }
