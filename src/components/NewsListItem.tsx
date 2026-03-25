@@ -3,6 +3,7 @@
 import type { NewsItem } from "@/lib/fetch-news";
 import { formatDistanceToNow } from "date-fns";
 import { SourceLogo } from "./SourceLogo";
+import { quickTweetFromHeadline } from "@/lib/tweet-drafter";
 
 interface NewsListItemProps {
   item: NewsItem;
@@ -65,6 +66,19 @@ export function NewsListItem({
         {timeAgo}
       </span>
 
+      <a
+        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(quickTweetFromHeadline(item.title, item.link))}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        className="shrink-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:text-black"
+        style={{ color: "var(--text-muted)" }}
+        title="Tweet this"
+      >
+        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
       <button
         onClick={(e) => { e.stopPropagation(); onToggleBookmark(); }}
         className="shrink-0 p-1 transition-colors hover:text-teal-dark"

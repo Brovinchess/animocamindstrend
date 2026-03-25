@@ -6,6 +6,7 @@ import type { NewsItem } from "@/lib/fetch-news";
 import { formatDistanceToNow, format } from "date-fns";
 import { SourceLogo } from "./SourceLogo";
 import { getTagById } from "@/lib/topic-tags";
+import { quickTweetFromHeadline } from "@/lib/tweet-drafter";
 
 interface ArticleModalProps {
   item: NewsItem | null;
@@ -182,18 +183,30 @@ export function ArticleModal({
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="px-6 pb-5">
+        {/* CTAs */}
+        <div className="px-6 pb-5 flex gap-2">
           <a
             href={item.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-teal py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-dark"
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-teal py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-dark"
           >
             Read full article
             <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
+          </a>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(quickTweetFromHeadline(item.title, item.link))}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium text-white transition-colors hover:opacity-90"
+            style={{ background: "var(--text-primary)" }}
+          >
+            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            Tweet
           </a>
         </div>
       </div>
