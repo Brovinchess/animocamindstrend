@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import type { NewsItem } from "@/lib/fetch-news";
 import { formatDistanceToNow } from "date-fns";
 import { SourceLogo } from "./SourceLogo";
@@ -27,13 +28,13 @@ export function NewsCard({
   onShare,
   index,
 }: NewsCardProps) {
-  const timeAgo = (() => {
+  const timeAgo = useMemo(() => {
     try {
       return formatDistanceToNow(new Date(item.pubDate), { addSuffix: true });
     } catch {
       return "";
     }
-  })();
+  }, [item.pubDate]);
 
   return (
     <article

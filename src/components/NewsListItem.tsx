@@ -35,9 +35,9 @@ export function NewsListItem({
   return (
     <div
       onClick={onClick}
-      className={`group flex items-center gap-3 cursor-pointer border-b px-4 py-3 transition-all animate-fade-in-up ${
+      className={`group flex items-center gap-3 cursor-pointer border-b px-4 py-3 transition-all animate-fade-in-up hover:bg-[var(--surface-hover)] ${
         isFocused ? "ring-2 ring-teal/40 rounded-lg" : ""
-      } ${isRead ? "opacity-50" : ""}`}
+      } ${isRead ? "opacity-50 hover:opacity-80" : ""}`}
       style={{
         borderColor: "var(--border)",
         animationDelay: `${index * 30}ms`,

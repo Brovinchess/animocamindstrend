@@ -139,6 +139,193 @@ const logos: Record<string, React.ReactNode> = {
       <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">MIT</text>
     </svg>
   ),
+  // Web3 / Crypto sources
+  coindesk: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#0A3F8F">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">CD</text>
+    </svg>
+  ),
+  "the-block": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#000000">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">TB</text>
+    </svg>
+  ),
+  decrypt: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#2C6FBB">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 8l8 4-8 4V8z" fill="white"/>
+    </svg>
+  ),
+  "decrypt-gaming": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#7C3AED">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 8l8 4-8 4V8z" fill="white"/>
+    </svg>
+  ),
+  cointelegraph: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#1A1A2E">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="#F5A623" fontSize="11" fontWeight="bold">CT</text>
+    </svg>
+  ),
+  blockworks: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#6366F1">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">BW</text>
+    </svg>
+  ),
+  defillama: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#4A5568">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">DL</text>
+    </svg>
+  ),
+  // Finance sources
+  "cnbc-finance": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#005594">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="15" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">CNBC</text>
+    </svg>
+  ),
+  "cnbc-tech": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#005594">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="15" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">CNBC</text>
+    </svg>
+  ),
+  marketwatch: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#1A8A1A">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">MW</text>
+    </svg>
+  ),
+  "seeking-alpha": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#F58220">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">SA</text>
+    </svg>
+  ),
+  "rundown-ai": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#6D28D9">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">RD</text>
+    </svg>
+  ),
+  // Additional AI sources
+  "venturebeat-ai": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#C33E22">
+      <path d="M2 4h5l5 12 5-12h5L14 22h-4L2 4z"/>
+    </svg>
+  ),
+  "wired-ai": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="currentColor" style={{ color: "var(--text-primary)" }}>
+      <rect x="2" y="6" width="20" height="12" rx="2"/>
+      <text x="12" y="15.5" textAnchor="middle" fill="var(--surface)" fontSize="7" fontWeight="900">WIRED</text>
+    </svg>
+  ),
+  // New Web3 sources
+  chainalysis: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#1652F0">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 12a4 4 0 018 0" stroke="white" strokeWidth="2" fill="none"/>
+      <path d="M8 12a4 4 0 000 0" stroke="white" strokeWidth="2" fill="none" strokeDasharray="2 2"/>
+    </svg>
+  ),
+  kraken: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#5741D9">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">K</text>
+    </svg>
+  ),
+  messari: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#2563EB">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">M</text>
+    </svg>
+  ),
+  dappradar: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#5C6AFF">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">DR</text>
+    </svg>
+  ),
+  "a16z-crypto": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#000000">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="15" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">a16z</text>
+    </svg>
+  ),
+  // New Finance sources
+  "wsj-business": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#0274B6">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="15" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">WSJ</text>
+    </svg>
+  ),
+  "wsj-markets": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#0274B6">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="15" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">WSJ</text>
+    </svg>
+  ),
+  fortune: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#E42527">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="900">F</text>
+    </svg>
+  ),
+  "motley-fool": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#5256A6">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">MF</text>
+    </svg>
+  ),
+  // New AI sources
+  "ieee-spectrum": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#00629B">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="15" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">IEEE</text>
+    </svg>
+  ),
+  "infoq-ai": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#007BFF">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">iQ</text>
+    </svg>
+  ),
+  // New Web3 sources
+  "the-defiant": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#8B5CF6">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">TD</text>
+    </svg>
+  ),
+  "ethereum-blog": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#627EEA">
+      <path d="M12 2l-7 11.5 7 4.2 7-4.2L12 2zm-7 13l7 7 7-7-7 4.2L5 15z"/>
+    </svg>
+  ),
+  "bitcoin-magazine": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#F7931A">
+      <circle cx="12" cy="12" r="10"/>
+      <text x="12" y="17" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">B</text>
+    </svg>
+  ),
+  // New Finance sources
+  "yahoo-finance": (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#6001D2">
+      <rect x="2" y="2" width="20" height="20" rx="4"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Y!</text>
+    </svg>
+  ),
+  kiplinger: (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="#003366">
+      <rect x="2" y="2" width="20" height="20" rx="3"/>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">K</text>
+    </svg>
+  ),
 };
 
 export function SourceLogo({

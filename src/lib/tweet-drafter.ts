@@ -34,6 +34,8 @@ function detectNewsType(article: NewsItem): string {
   if (/research|paper|study|found that|experiment|benchmark/i.test(text)) return "research";
   if (/open.?source|github|model.?weight|apache|mit license/i.test(text)) return "opensource";
   if (/partner|collab|integrat|deal|agreement/i.test(text)) return "partnership";
+  if (/bitcoin|ethereum|crypto|blockchain|web3|nft|defi|token|airdrop|solana|polygon/i.test(text)) return "web3";
+  if (/stock|market|fed|inflation|earnings|ipo|nasdaq|recession|treasury|gdp/i.test(text)) return "finance";
   return "general";
 }
 
@@ -42,6 +44,7 @@ function extractSubject(title: string): string {
   const companyPatterns = [
     /\b(OpenAI|Google|Microsoft|Meta|Anthropic|Apple|Amazon|NVIDIA|Mistral|Cohere|Stability AI|Hugging Face|xAI|Perplexity)\b/i,
     /\b(GPT-\d+|Claude|Gemini|Llama|Copilot|ChatGPT|Midjourney|DALL-E|Sora|Grok)\b/i,
+    /\b(Bitcoin|Ethereum|Solana|Polygon|Coinbase|Binance|Animoca|Immutable|Uniswap)\b/i,
   ];
   for (const pattern of companyPatterns) {
     const match = title.match(pattern);
@@ -84,24 +87,32 @@ export function draftTweetsFromArticle(article: NewsItem): TweetDraft[] {
     ? `New research worth paying attention to: ${mainPoint}.\n\n${secondPoint ? secondPoint + "." : "The implications are significant."}`
     : newsType === "security"
     ? `Security matters more than speed. ${mainPoint}.\n\n${secondPoint ? secondPoint + "." : "This is a wake-up call."}`
+    : newsType === "web3"
+    ? `Web3 signal worth watching: ${mainPoint}.\n\n${secondPoint ? secondPoint + "." : "The on-chain narrative is shifting."}`
+    : newsType === "finance"
+    ? `Markets are moving. ${mainPoint}.\n\n${secondPoint ? secondPoint + "." : "Here's what this means for the macro picture."}`
     : `${mainPoint}.\n\n${secondPoint ? `Why this matters: ${secondPoint}.` : "The implications here run deeper than the headline suggests."}`;
   drafts.push(makeDraft("why-it-matters", "Why It Matters",
     trimToFit(`${whyItMatters}\n\n${link}`, 280)
   ));
 
-  // 3. Thread Starter — for deep-dive engagement
-  const threadParts = points.slice(0, 4);
+  // 3. Thread — designed for thread mode, NOT trimmed to 280
+  const threadParts = points.slice(0, 5);
   const threadBody = [
-    `${title}`,
+    `${subject ? subject + ": " : ""}${title}`,
     "",
-    "Key takeaways:",
+    "Here's what you need to know:",
     "",
     ...threadParts.map((p, i) => `${i + 1}. ${p}.`),
     "",
-    `Read the full story: ${link}`,
-  ].join("\n");
-  drafts.push(makeDraft("thread", "Thread Starter",
-    trimToFit(threadBody, 280)
+    secondPoint ? `Why this matters: ${secondPoint}.` : "",
+    thirdPoint ? `${thirdPoint}.` : "",
+    "",
+    `Source: ${source.name}`,
+    `Full article: ${link}`,
+  ].filter(Boolean).join("\n");
+  drafts.push(makeDraft("thread", "Thread",
+    threadBody // No trim — thread mode auto-splits into multiple tweets
   ));
 
   // 4. Industry Perspective — thought leadership

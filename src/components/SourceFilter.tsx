@@ -1,6 +1,6 @@
 "use client";
 
-import { NEWS_SOURCES, CATEGORY_LABELS, type CategoryType } from "@/lib/news-sources";
+import { NEWS_SOURCES, CATEGORY_LABELS, AI_CATEGORIES, type CategoryType } from "@/lib/news-sources";
 import { SourceLogo } from "./SourceLogo";
 
 interface SourceFilterProps {
@@ -39,8 +39,9 @@ export function SourceFilter({
         >
           All
         </Pill>
-        {(Object.entries(CATEGORY_LABELS) as [CategoryType, string][]).map(
-          ([key, label]) => (
+        {(Object.entries(CATEGORY_LABELS) as [CategoryType, string][])
+          .filter(([key]) => AI_CATEGORIES.includes(key))
+          .map(([key, label]) => (
             <Pill
               key={key}
               active={activeCategory === key && !showBookmarks}
@@ -51,8 +52,7 @@ export function SourceFilter({
             >
               {label}
             </Pill>
-          )
-        )}
+          ))}
         <Pill active={showBookmarks} onClick={onToggleBookmarks} accent>
           Saved {bookmarkCount > 0 && `(${bookmarkCount})`}
         </Pill>
@@ -74,7 +74,7 @@ export function SourceFilter({
       {!showBookmarks && (
         <div className="flex flex-nowrap gap-1.5 overflow-x-auto pb-1 scrollbar-none">
           {NEWS_SOURCES.filter(
-            (s) => !activeCategory || s.category === activeCategory
+            (s) => AI_CATEGORIES.includes(s.category) && (!activeCategory || s.category === activeCategory)
           ).map((source) => {
             const health = sourceHealth[source.slug];
             return (

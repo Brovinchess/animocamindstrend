@@ -6,6 +6,8 @@ import { NewsDashboard } from "@/components/NewsDashboard";
 import { RedditTrends } from "@/components/RedditTrends";
 import { RedditStrategy } from "@/components/RedditStrategy";
 import { HackerNewsFeed } from "@/components/HackerNewsFeed";
+import { Web3Feed } from "@/components/Web3Feed";
+import { FinanceFeed } from "@/components/FinanceFeed";
 import { TweetFromNews } from "@/components/TweetFromNews";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TabNav, type TabId } from "@/components/TabNav";
@@ -33,10 +35,10 @@ export default function Home() {
             <div>
               <h1 className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>
                 Animocaminds
-                <span className="text-teal ml-1.5 font-semibold">AI</span>
+                <span className="text-teal ml-1.5 font-semibold">Trends</span>
               </h1>
               <p className="text-[12px] mt-0.5" style={{ color: "var(--text-tertiary)" }}>
-                Real-time intelligence from {NEWS_SOURCES.length} sources
+                AI, Web3 & Finance — {NEWS_SOURCES.length} sources live
               </p>
             </div>
           </div>
@@ -56,17 +58,23 @@ export default function Home() {
         <div className={`min-h-[60vh] ${activeTab === "news" ? "animate-tab-in" : "hidden"}`}>
           <NewsDashboard />
         </div>
+        <div className={`min-h-[60vh] ${activeTab === "web3" ? "animate-tab-in" : "hidden"}`}>
+          <Web3Feed />
+        </div>
+        <div className={`min-h-[60vh] ${activeTab === "finance" ? "animate-tab-in" : "hidden"}`}>
+          <FinanceFeed />
+        </div>
         <div className={`min-h-[60vh] ${activeTab === "hackernews" ? "animate-tab-in" : "hidden"}`}>
           <HackerNewsFeed />
         </div>
         <div className={`min-h-[60vh] ${activeTab === "reddit" ? "animate-tab-in" : "hidden"}`}>
           <RedditTrends />
         </div>
-        <div className={`min-h-[60vh] ${activeTab === "tweet" ? "animate-tab-in" : "hidden"}`}>
-          <TweetFromNews />
-        </div>
         <div className={`min-h-[60vh] ${activeTab === "strategy" ? "animate-tab-in" : "hidden"}`}>
           <RedditStrategy />
+        </div>
+        <div className={`min-h-[60vh] ${activeTab === "tweet" ? "animate-tab-in" : "hidden"}`}>
+          <TweetFromNews />
         </div>
 
         {/* Footer */}
@@ -92,7 +100,7 @@ export default function Home() {
               </div>
             </div>
             <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>
-              Animocaminds AI Dashboard
+              Animocaminds Trend Analysis
             </p>
           </div>
         </footer>

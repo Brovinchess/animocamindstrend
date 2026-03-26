@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Animocaminds - AI News",
-  description: "Real-time AI technology news from all major tech companies",
+  title: "Animocaminds Trend Analysis",
+  description: "Real-time trend analysis across AI, Web3, crypto, and finance",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,

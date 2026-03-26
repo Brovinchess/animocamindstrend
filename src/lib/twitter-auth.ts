@@ -141,6 +141,54 @@ export async function postTweet(
   };
 }
 
+export async function postThread(
+  screenName: string,
+  tweets: string[]
+): Promise<{ success: boolean; threadUrl?: string; error?: string; postedCount: number }> {
+  const tokens = userTokens.get(screenName);
+  if (!tokens) return { success: false, error: "Not authenticated", postedCount: 0 };
+
+  const token = { key: tokens.accessToken, secret: tokens.accessSecret };
+  let lastTweetId: string | null = null;
+  let firstTweetId: string | null = null;
+
+  for (let i = 0; i < tweets.length; i++) {
+    const requestData = {
+      url: "https://api.twitter.com/2/tweets",
+      method: "POST",
+    };
+    const headers = oauth.toHeader(oauth.authorize(requestData, token));
+
+    const body: Record<string, unknown> = { text: tweets[i] };
+    if (lastTweetId) {
+      body.reply = { in_reply_to_tweet_id: lastTweetId };
+    }
+
+    const res = await fetch(requestData.url, {
+      method: "POST",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      return { success: false, error: `Tweet ${i + 1} failed: ${res.status} ${err}`, postedCount: i };
+    }
+
+    const data = await res.json();
+    lastTweetId = data?.data?.id || null;
+    if (i === 0) firstTweetId = lastTweetId;
+  }
+
+  return {
+    success: true,
+    threadUrl: firstTweetId
+      ? `https://x.com/${screenName}/status/${firstTweetId}`
+      : `https://x.com/${screenName}`,
+    postedCount: tweets.length,
+  };
+}
+
 export function getConnectedAccounts(): string[] {
   return [...userTokens.keys()];
 }

@@ -105,6 +105,41 @@ export const TOPIC_TAGS: TagDefinition[] = [
     bg: "bg-pink-50",
     keywords: ["launch", "release", "introducing", "announce", "available", "update", "new feature", "preview", "beta", "rollout"],
   },
+  {
+    id: "web3",
+    label: "Web3",
+    color: "text-violet-700",
+    bg: "bg-violet-50",
+    keywords: ["web3", "blockchain", "decentraliz", "dapp", "smart contract", "dao", "on-chain", "layer 2", "layer 1", "consensus", "validator", "mainnet", "testnet"],
+  },
+  {
+    id: "crypto",
+    label: "Crypto",
+    color: "text-amber-700",
+    bg: "bg-amber-50",
+    keywords: ["bitcoin", "ethereum", "crypto", "token", "altcoin", "stablecoin", "btc", "eth", "solana", "polygon", "matic", "binance", "coinbase", "exchange", "wallet"],
+  },
+  {
+    id: "defi",
+    label: "DeFi",
+    color: "text-emerald-700",
+    bg: "bg-emerald-50",
+    keywords: ["defi", "decentralized finance", "yield", "liquidity", "amm", "dex", "lending", "staking", "tvl", "protocol", "swap", "aave", "uniswap", "compound"],
+  },
+  {
+    id: "nft",
+    label: "NFT",
+    color: "text-fuchsia-700",
+    bg: "bg-fuchsia-50",
+    keywords: ["nft", "non-fungible", "collectible", "digital art", "metaverse", "virtual land", "gaming nft", "mint", "marketplace", "opensea"],
+  },
+  {
+    id: "markets",
+    label: "Markets",
+    color: "text-sky-700",
+    bg: "bg-sky-50",
+    keywords: ["stock", "market", "bull", "bear", "rally", "crash", "ipo", "earnings", "nasdaq", "s&p", "dow", "fed", "interest rate", "inflation", "gdp", "recession", "treasury"],
+  },
 ];
 
 export function extractTags(title: string, description: string): string[] {

@@ -1,7 +1,7 @@
 {
-  "name": "Animocaminds - AI News",
+  "name": "Animocaminds Trend Analysis",
   "short_name": "Animocaminds",
-  "description": "Real-time AI technology news from 21+ sources",
+  "description": "Real-time trend analysis across AI, Web3, crypto, and finance",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fafafa",

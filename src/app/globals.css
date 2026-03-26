@@ -118,6 +118,14 @@ body {
 /* Better card hover transitions */
 article {
   will-change: transform;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+article:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.dark article:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Smooth link transitions */
@@ -129,4 +137,13 @@ a {
 kbd {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 10px;
+}
+
+/* Pulse animation for live indicator */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
 }

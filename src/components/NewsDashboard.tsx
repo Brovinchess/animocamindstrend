@@ -65,7 +65,11 @@ export function NewsDashboard() {
       const res = await fetch("/api/news");
       const data = await res.json();
       if (data.success) {
-        setItems(data.items);
+        // Filter out web3/finance — they have their own tabs
+        const aiItems = data.items.filter(
+          (i: NewsItem) => i.source.category !== "web3" && i.source.category !== "finance"
+        );
+        setItems(aiItems);
         setSourceHealth(data.sourceHealth || {});
         setLastUpdated(new Date());
         setError(null);

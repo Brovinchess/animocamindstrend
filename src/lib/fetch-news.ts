@@ -39,6 +39,11 @@ export function calculateSalience(title: string): SalienceScore {
     "claude", "llama", "model", "api", "open source", "safety",
     "regulation", "billion", "partnership", "acquisition", "new",
     "introducing", "preview", "available", "update",
+    // Web3 / Crypto
+    "bitcoin", "ethereum", "blockchain", "nft", "defi", "web3",
+    "token", "airdrop", "mainnet", "hack", "exploit",
+    // Finance
+    "fed", "inflation", "recession", "ipo", "earnings", "rally", "crash",
   ];
   const lowTitle = title.toLowerCase();
   const matches = highKeywords.filter((kw) => lowTitle.includes(kw)).length;
